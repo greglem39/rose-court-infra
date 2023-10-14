@@ -31,6 +31,18 @@ variable "get-pass-data" {
   description = "to get password data for this instance"
 }
 
+variable "rdp-port" {
+  default     = 3389
+  description = "rdp port"
+
+}
+
+variable "rdp-protocol" {
+  default     = "TCP"
+  description = "rdp protocol"
+
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"

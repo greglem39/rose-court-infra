@@ -30,9 +30,9 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
 
   ingress {
     description = "RDP from home"
-    from_port   = 3389
-    to_port     = 3389
-    protocol    = "TCP"
+    from_port   = var.rdp-port
+    to_port     = var.rdp-port
+    protocol    = var.rdp-protocol
     cidr_blocks = [var.home-ip]
   }
 
