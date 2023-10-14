@@ -57,8 +57,8 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
 }
 
 resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
-  name       = "/dev/win-ec2-pass"
-  type       = "SecureString"
+  name       = var.parameter-name
+  type       = var.parameter-type
   depends_on = [aws_instance.testWindows]
   value      = rsadecrypt(aws_instance.testWindows.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
 }

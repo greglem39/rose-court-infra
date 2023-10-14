@@ -49,6 +49,17 @@ variable "rdp-protocol" {
 
 }
 
+variable "parameter-name" {
+  default     = "/dev/win-ec2-pass"
+  description = "name of parameter"
+
+}
+
+variable "parameter-type" {
+  default = "SecureString"
+
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"
