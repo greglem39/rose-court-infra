@@ -9,6 +9,17 @@ variable "virginia-a" {
   description = "us-east-1a AZ"
 }
 
+variable "windows-instance-type" {
+  default     = "t2.micro"
+  description = "instance type for windows instances"
+
+}
+
+variable "rose-court-key-pair" {
+  default     = "rose-court-instance-key"
+  description = "key pair for the rose court"
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"
