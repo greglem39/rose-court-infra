@@ -22,3 +22,10 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   key_name          = var.rose-court-key-pair
   get_password_data = var.get-pass-data
 }
+
+resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
+  name       = "/dev/win-ec2-pass"
+  type       = "SecureString"
+  depends_on = [aws_instance.testWindows]
+
+}
