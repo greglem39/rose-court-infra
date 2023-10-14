@@ -82,6 +82,23 @@ variable "rdp-protocol" {
 
 }
 
+variable "egress-port" {
+  default     = 0
+  description = "egress ports"
+
+}
+
+variable "egress-protocol" {
+  default     = "-1"
+  description = "egress protocol"
+
+}
+
+variable "egress-cidr-block" {
+  default = "0.0.0.0/0"
+
+}
+
 variable "parameter-name" {
   default     = "/dev/win-ec2-pass"
   description = "name of parameter"

@@ -37,11 +37,10 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    from_port   = var.egress-port
+    to_port     = var.egress-port
+    protocol    = var.egress-protocol
+    cidr_blocks = [var.egress-cidr-block]
   }
 
 }
