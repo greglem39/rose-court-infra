@@ -4,6 +4,11 @@ variable "region-va" {
   description = "the region in which you will deploy your resources"
 }
 
+variable "virginia-a" {
+  default     = "us-east-1a"
+  description = "us-east-1a AZ"
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"
