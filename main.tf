@@ -14,3 +14,9 @@ data "aws_ami" "windows" {
   owners = ["801119661308"]
 
 }
+
+resource "aws_instance" "testWindows" {
+  ami               = data.aws_ami.windows.id
+  instance_type     = "t2.micro"
+  availability_zone = var.virginia-a
+}
