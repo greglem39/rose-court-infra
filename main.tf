@@ -7,7 +7,7 @@ data "aws_ami" "windows" {
   }
 
   filter {
-    name   = "virtualization type"
+    name   = "virtualization-type"
     values = ["hvm"]
   }
 
