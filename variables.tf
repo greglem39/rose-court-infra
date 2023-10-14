@@ -31,6 +31,11 @@ variable "get-pass-data" {
   description = "to get password data for this instance"
 }
 
+variable "rdp-sg-name" {
+  default     = "allow-admin-rdp"
+  description = "name of sg"
+}
+
 variable "rdp-port" {
   default     = 3389
   description = "rdp port"
