@@ -8,4 +8,3 @@ variable "region-va" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"
 # }
-
