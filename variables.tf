@@ -20,6 +20,11 @@ variable "rose-court-key-pair" {
   description = "key pair for the rose court"
 }
 
+variable "get-pass-data" {
+  default     = true
+  description = "to get password data for this instance"
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"

@@ -20,4 +20,5 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   instance_type     = var.windows-instance-type
   availability_zone = var.virginia-a
   key_name          = var.rose-court-key-pair
+  get_password_data = var.get-pass-data
 }
