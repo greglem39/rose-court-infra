@@ -65,6 +65,12 @@ variable "get-pass-data" {
   description = "to get password data for this instance"
 }
 
+variable "dc-instance-name" {
+  default     = "rose-court-DC"
+  description = "name of our DC instance"
+
+}
+
 variable "rdp-sg-name" {
   default     = "allow-admin-rdp"
   description = "name of sg"

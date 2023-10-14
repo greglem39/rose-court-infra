@@ -53,6 +53,9 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   key_name          = aws_key_pair.rose-court-instance-key.key_name
   get_password_data = var.get-pass-data
   security_groups   = [aws_security_group.allow-RDP.name]
+  tags = {
+    Name = var.dc-instance-name
+  }
 }
 
 resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
