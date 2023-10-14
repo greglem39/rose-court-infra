@@ -9,6 +9,12 @@ variable "virginia-a" {
   description = "us-east-1a AZ"
 }
 
+variable "key-algo" {
+  default     = "RSA"
+  description = "key type"
+
+}
+
 variable "windows-instance-type" {
   default     = "t2.micro"
   description = "instance type for windows instances"
