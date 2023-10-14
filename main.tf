@@ -25,7 +25,7 @@ resource "aws_key_pair" "rose-court-instance-key" { #creating an instance key
 }
 
 resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified location
-  name        = "allow-admin-rdp"
+  name        = var.rdp-sg-name
   description = "to allow home RDP"
 
   ingress {
