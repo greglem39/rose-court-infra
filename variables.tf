@@ -10,6 +10,39 @@ variable "virginia-a" {
   description = "us-east-1a AZ"
 }
 
+variable "most-recent-windows-version" {
+  default     = true
+  description = "do we want most recent version"
+}
+
+variable "name-filter" {
+  default     = "name"
+  description = "what filter is this"
+}
+
+variable "name-filter-value" {
+  default     = "Windows_Server-2019-English-Full-Base-*"
+  description = "value of the name filter"
+}
+
+variable "virtualization-filter" {
+  default     = "virtualization-type"
+  description = "virtualization type filter"
+
+}
+
+variable "virtualization-filter-value" {
+  default     = "hvm"
+  description = "value of virtualization"
+
+}
+
+variable "owners" {
+  default     = "801119661308"
+  description = "owners value"
+
+}
+
 variable "key-algo" {
   default     = "RSA"
   description = "key type"

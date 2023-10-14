@@ -1,17 +1,17 @@
 data "aws_ami" "windows" { # pulling latest version of windows server
-  most_recent = true
+  most_recent = var.most-recent-windows-version
 
   filter {
-    name   = "name"
-    values = ["Windows_Server-2019-English-Full-Base-*"]
+    name   = var.name-filter
+    values = [var.name-filter-value]
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = var.virtualization-filter
+    values = [var.virtualization-filter-value]
   }
 
-  owners = ["801119661308"]
+  owners = [var.owners]
 
 }
 
