@@ -1,4 +1,4 @@
-data "aws_ami" "windows" {
+data "aws_ami" "windows" { # pulling latest version of windows server
   most_recent = true
 
   filter {
@@ -15,8 +15,9 @@ data "aws_ami" "windows" {
 
 }
 
-resource "aws_instance" "testWindows" {
+resource "aws_instance" "testWindows" { #using the above data for the AMI
   ami               = data.aws_ami.windows.id
   instance_type     = "t2.micro"
   availability_zone = var.virginia-a
+  key_name          = "rose-court-instance-key"
 }
