@@ -65,8 +65,8 @@ variable "get-pass-data" {
   description = "to get password data for this instance"
 }
 
-variable "dc-instance-name" {
-  default     = "rose-court-DC"
+variable "instance-name" {
+  default     = "underworld-pc"
   description = "name of our DC instance"
 
 }
@@ -164,4 +164,33 @@ variable "DomainMode" {
   default     = "7"
 }
 
+#nico user
+variable "UserName" {
+  default     = "Nico di Angelo"
+  description = "User name"
+  sensitive   = true
+}
 
+variable "GivenName" {
+  default     = "Nico"
+  description = "Given name"
+  sensitive   = true
+}
+
+variable "SurName" {
+  default     = "di Angelo"
+  description = "Surname"
+  sensitive   = true
+}
+
+variable "SamAccountName" {
+  default     = "nicodiangelo"
+  description = "SamAccountName"
+  sensitive   = true
+}
+
+variable "DisplayName" {
+  default     = "Nico di Angelo"
+  description = "Display name"
+  sensitive   = true
+}
