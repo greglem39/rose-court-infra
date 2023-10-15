@@ -146,6 +146,12 @@ variable "DomainName" {
   sensitive   = true
 }
 
+variable "DomainNetBiosName" {
+  description = "the domain name"
+  default     = "UNDERWORLD"
+  sensitive   = true
+}
+
 variable "ForestMode" {
   type        = string
   description = "Specifies the forest functional level for the new forest. "

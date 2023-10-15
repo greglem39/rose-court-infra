@@ -57,10 +57,27 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
     Name = var.dc-instance-name
   }
 
+  connection { # setting up remote execution
+    type     = "winrm"
+    user     = "Administrator"
+    password = aws_ssm_parameter.windows-ec2.value
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "$SecureAdminSafeModePassword = ConvertTo-SecureString -String ${var.AdminSafeModePassword} -AsPlainText -Force",
+      "Rename-Computer -NewName ${var.ServerName}",
+      "Install-WindowsFeature AD-Domain-Services -IncludeManagementTools",
+      "Import-Module ADDSDeployment",
+      "Install-ADDSForest -confirm:$false -CreateDnsDelegation:$false -DatabasePath \"C:\\Windows\\NTDS\" -DomainMode ${var.DomainMode} -DomainName ${var.DomainName} -DomainNetbiosName ${var.DomainNetBiosName} -ForestMode ${var.ForestMode} -InstallDns:$true -LogPath \"C:\\Windows\\NTDS\" -SysvolPath \"C:\\Windows\\SYSVOL\" -SafeModeAdministratorPassword $SecureAdminSafeModePassword -NoRebootOnCompletion:$false -Force:$true"
+    ]
+  }
+
   # refer to https://www.microsoft.com/en-gb/industry/blog/technetuk/2016/06/08/setting-up-active-directory-via-powershell/ for AD setup
   #https://www.linkedin.com/pulse/deploying-domain-controller-ec2-instance-terraform-nicanor-foping-/
 
-  # user_data = templatefile("userdata.tpl",
+  # user_data = templatefile("userdata.txt",
 
   #   {
   #     ServerName            = var.ServerName
