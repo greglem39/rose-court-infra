@@ -56,6 +56,15 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   tags = {
     Name = var.dc-instance-name
   }
+
+  # user_data = templatefile("userdata.tpl",
+
+  #   {
+  #     ServerName            = var.ServerName
+  #     DomainName            = var.DomainName
+  #     AdminSafeModePassword = var.AdminSafeModePassword
+  #   }
+  # )
 }
 
 resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code

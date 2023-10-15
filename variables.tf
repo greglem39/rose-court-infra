@@ -120,3 +120,25 @@ variable "parameter-type" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"
 # }
+
+### vars for user data file ###
+# variable "ServerName" {
+#   description = "the name of the server"
+#   default     = "UnderworldDC"
+
+# }
+
+# variable "AdminSafeModePassword" {
+#   description = "password for when the computer is started in safe mode"
+#   default     = ""
+#   sensitive   = true
+
+# }
+
+# variable "DomainName" {
+#   description = "the domain name"
+#   default     = "underworld.net"
+
+# }
+
+
