@@ -127,23 +127,35 @@ variable "nico-param-name" {
 # }
 
 ### vars for user data file ###
-# variable "ServerName" {
-#   description = "the name of the server"
-#   default     = "UnderworldDC"
+variable "ServerName" {
+  description = "the name of the server"
+  default     = "UnderworldDC"
 
-# }
+}
 
-# variable "AdminSafeModePassword" {
-#   description = "password for when the computer is started in safe mode"
-#   default     = ""
-#   sensitive   = true
+variable "AdminSafeModePassword" {
+  description = "password for when the computer is started in safe mode"
+  default     = ""
+  sensitive   = true
 
-# }
+}
 
-# variable "DomainName" {
-#   description = "the domain name"
-#   default     = "underworld.net"
+variable "DomainName" {
+  description = "the domain name"
+  default     = "underworld.net"
+  sensitive   = true
+}
 
-# }
+variable "ForestMode" {
+  type        = string
+  description = "Specifies the forest functional level for the new forest. "
+  default     = "7"
+}
+
+variable "DomainMode" {
+  type        = string
+  description = "Specifies the domain functional level of the first domain in the creation of a new forest. "
+  default     = "7"
+}
 
 

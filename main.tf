@@ -58,7 +58,7 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   }
 
   # refer to https://www.microsoft.com/en-gb/industry/blog/technetuk/2016/06/08/setting-up-active-directory-via-powershell/ for AD setup
-  #https://www.linkedin.com/notifications/?filter=all
+  #https://www.linkedin.com/pulse/deploying-domain-controller-ec2-instance-terraform-nicanor-foping-/
 
   # user_data = templatefile("userdata.tpl",
 
@@ -66,6 +66,8 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   #     ServerName            = var.ServerName
   #     DomainName            = var.DomainName
   #     AdminSafeModePassword = var.AdminSafeModePassword
+  #     ForestMode            = var.ForestMode
+  #     DomainMode            = var.DomainMode
   #   }
   # )
 }
