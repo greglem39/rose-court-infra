@@ -116,6 +116,11 @@ variable "parameter-type" {
 
 }
 
+variable "nico-param-name" {
+  default = "nico-pass"
+
+}
+
 # variable "region-cali" {
 #   description = "set the region for our aws west alias"
 #   default     = "us-west-1"

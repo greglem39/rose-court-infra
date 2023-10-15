@@ -57,6 +57,9 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
     Name = var.dc-instance-name
   }
 
+  # refer to https://www.microsoft.com/en-gb/industry/blog/technetuk/2016/06/08/setting-up-active-directory-via-powershell/ for AD setup
+  #https://www.linkedin.com/notifications/?filter=all
+
   # user_data = templatefile("userdata.tpl",
 
   #   {
@@ -72,4 +75,10 @@ resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so w
   type       = var.parameter-type
   depends_on = [aws_instance.testWindows]
   value      = rsadecrypt(aws_instance.testWindows.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
+}
+
+resource "aws_ssm_parameter" "nico-pass" { # storing the windows password so we don't leave it in plaintext in code
+  name  = var.nico-param-name
+  type  = var.parameter-type
+  value = var.nico-password
 }
