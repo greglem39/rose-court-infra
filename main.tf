@@ -66,6 +66,21 @@ resource "aws_instance" "underworld-dc" { #using the above data for the AMI
 
 }
 
+resource "aws_instance" "underworld-member" { #creating a member ec2 for our AD domain
+  depends_on        = [tls_private_key.instance-key]
+  ami               = data.aws_ami.windows.id
+  instance_type     = var.windows-instance-type
+  availability_zone = var.virginia-a
+  key_name          = aws_key_pair.rose-court-instance-key.key_name
+  get_password_data = var.get-pass-data
+  security_groups   = [aws_security_group.allow-RDP.name]
+  tags = {
+    Name = var.member-instance-name
+  }
+  count = 1 # change depending on how many you want to deploy
+
+}
+
 resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
   name       = var.parameter-name
   type       = var.parameter-type

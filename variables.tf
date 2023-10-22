@@ -71,6 +71,12 @@ variable "instance-name" {
 
 }
 
+variable "member-instance-name" {
+  default     = "underworld-1"
+  description = "name of our DC instance"
+
+}
+
 variable "rdp-sg-name" {
   default     = "allow-admin-rdp"
   description = "name of sg"
