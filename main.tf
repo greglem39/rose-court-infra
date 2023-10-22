@@ -24,6 +24,13 @@ resource "aws_key_pair" "rose-court-instance-key" { #creating an instance key
   public_key = tls_private_key.instance-key.public_key_openssh
 }
 
+# TODO:
+# Create VPC with DHCP option set for houseofhades.net domain
+# create IGW and attach to VPC 
+# Create Subnet within VPC 
+# Configure below SG to allow traffic within the subnet
+# Automate EC2 instance(s) joining the domain via PowerShell
+
 resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified location
   name        = var.rdp-sg-name
   description = "to allow home RDP"
