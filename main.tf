@@ -36,6 +36,13 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
     cidr_blocks = [var.home-ip]
   }
 
+  ingress {
+    from_port = 0
+    to_port   = 0
+    protocol  = -1
+    self      = true
+  }
+
   egress {
     from_port   = var.egress-port
     to_port     = var.egress-port
@@ -63,11 +70,17 @@ resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so w
   name       = var.parameter-name
   type       = var.parameter-type
   depends_on = [aws_instance.underworld-dc]
-  value      = rsadecrypt(aws_instance.underworld-dc.get_password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
+  value      = rsadecrypt(aws_instance.underworld-dc.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
 }
 
 resource "aws_ssm_parameter" "nico-pass" { # storing the windows password so we don't leave it in plaintext in code
   name  = var.nico-param-name
   type  = var.parameter-type
   value = var.nico-password
+}
+
+resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password so we don't leave it in plaintext in code
+  name  = var.AdminSafeModePass-Param-name
+  type  = var.parameter-type
+  value = var.AdminSafeModePassword
 }

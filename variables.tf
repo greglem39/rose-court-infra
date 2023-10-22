@@ -133,6 +133,12 @@ variable "ServerName" {
 
 }
 
+variable "AdminSafeModePass-Param-name" {
+  description = "name for param"
+  default     = "AdminSafeModePassword"
+
+}
+
 variable "AdminSafeModePassword" {
   description = "password for when the computer is started in safe mode"
   default     = ""
