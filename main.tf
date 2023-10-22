@@ -50,6 +50,13 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
     cidr_blocks = ["172.31.0.0/20"]
   }
 
+  ingress {
+    from_port = 0
+    to_port   = 0
+    protocol  = -1
+    self      = true
+  }
+
   egress {
     from_port   = var.egress-port
     to_port     = var.egress-port
@@ -70,7 +77,9 @@ resource "aws_instance" "underworld-dc" { #using the above data for the AMI
   tags = {
     Name = var.instance-name
   }
-
+  lifecycle {
+    prevent_destroy = true # we really do not want our DC to be destroyed ...
+  }
 }
 
 resource "aws_instance" "underworld-member" { #creating a member ec2 for our AD domain
