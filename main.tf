@@ -45,7 +45,7 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
 
 }
 
-resource "aws_instance" "testWindows" { #using the above data for the AMI
+resource "aws_instance" "underworld-dc" { #using the above data for the AMI
   depends_on        = [tls_private_key.instance-key]
   ami               = data.aws_ami.windows.id
   instance_type     = var.windows-instance-type
@@ -56,13 +56,14 @@ resource "aws_instance" "testWindows" { #using the above data for the AMI
   tags = {
     Name = var.instance-name
   }
+
 }
 
 resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
   name       = var.parameter-name
   type       = var.parameter-type
-  depends_on = [aws_instance.testWindows]
-  value      = rsadecrypt(aws_instance.testWindows.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
+  depends_on = [aws_instance.underworld-dc]
+  value      = rsadecrypt(aws_instance.underworld-dc.get_password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
 }
 
 resource "aws_ssm_parameter" "nico-pass" { # storing the windows password so we don't leave it in plaintext in code

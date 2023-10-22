@@ -66,7 +66,7 @@ variable "get-pass-data" {
 }
 
 variable "instance-name" {
-  default     = "underworld-pc"
+  default     = "underworld-dc"
   description = "name of our DC instance"
 
 }
