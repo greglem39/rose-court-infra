@@ -112,7 +112,7 @@ variable "egress-cidr-block" {
 }
 
 variable "parameter-name" {
-  default     = "/dev/win-ec2-pass"
+  default     = "/dev/win-dc-pass"
   description = "name of parameter"
 
 }
