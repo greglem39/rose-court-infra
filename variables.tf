@@ -117,6 +117,12 @@ variable "parameter-name" {
 
 }
 
+variable "member-parameter-name" {
+  default     = "/dev/win-member-pass"
+  description = "name of parameter"
+
+}
+
 variable "parameter-type" {
   default = "SecureString"
 
