@@ -30,6 +30,7 @@ resource "aws_key_pair" "rose-court-instance-key" { #creating an instance key
 # Create Subnet within VPC 
 # Configure below SG to allow traffic within the subnet
 # Automate EC2 instance(s) joining the domain via PowerShell
+# set up Lambda/EventBridge to shut off/start EC2 on the weekend - https://repost.aws/knowledge-center/start-stop-lambda-eventbridge
 
 resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified location
   name        = var.rdp-sg-name
