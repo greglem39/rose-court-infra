@@ -126,8 +126,8 @@ resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password s
   value = var.AdminSafeModePassword
 }
 
-resource "aws_ami_from_instance" "DC-ami" {
-  name               = "DC-ami"
-  source_instance_id = aws_instance.underworld-dc.id
+# resource "aws_ami_from_instance" "DC-ami" {
+#   name               = "DC-ami"
+#   source_instance_id = aws_instance.underworld-dc.id
 
-}
+# }
