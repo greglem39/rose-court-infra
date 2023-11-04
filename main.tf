@@ -25,10 +25,12 @@ resource "aws_key_pair" "rose-court-instance-key" { #creating an instance key
 }
 
 # TODO:
+# Create AMI for DC installation - done 
 # Create VPC with DHCP option set for houseofhades.net domain
 # create IGW and attach to VPC 
 # Create Subnet within VPC 
 # Configure below SG to allow traffic within the subnet
+# move DC and member instances to new VPC/subnet
 # Automate EC2 instance(s) joining the domain via PowerShell
 # set up Lambda/EventBridge to shut off/start EC2 on the weekend - https://repost.aws/knowledge-center/start-stop-lambda-eventbridge
 
@@ -59,10 +61,10 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
   }
 
   egress {
-    from_port   = var.egress-port
-    to_port     = var.egress-port
-    protocol    = var.egress-protocol
-    cidr_blocks = [var.egress-cidr-block]
+    from_port = 0
+    to_port   = 0
+    protocol  = -1
+    self      = true
   }
 
 }
@@ -122,4 +124,10 @@ resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password s
   name  = var.AdminSafeModePass-Param-name
   type  = var.parameter-type
   value = var.AdminSafeModePassword
+}
+
+resource "aws_ami_from_instance" "DC-ami" {
+  name               = "DC-ami"
+  source_instance_id = aws_instance.underworld-dc.id
+
 }
