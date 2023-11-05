@@ -126,7 +126,7 @@ resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password s
   value = var.AdminSafeModePassword
 }
 
-# resource "aws_ami_from_instance" "DC-ami" {
+# resource "aws_ami_from_instance" "DC-ami" { # this was removed from the state file for use in manual testing. Can be recreated as more progress is made
 #   name               = "DC-ami"
 #   source_instance_id = aws_instance.underworld-dc.id
 
