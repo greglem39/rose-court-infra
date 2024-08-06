@@ -72,7 +72,7 @@ variable "instance-name" {
 }
 
 variable "member-instance-name" {
-  default     = "underworld-1"
+  default     = "underworld-member-1"
   description = "name of our DC instance"
 
 }

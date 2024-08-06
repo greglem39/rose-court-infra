@@ -69,21 +69,21 @@ resource "aws_security_group" "allow-RDP" { # want to allow RDP from specified l
 
 }
 
-resource "aws_instance" "underworld-dc" { #using the above data for the AMI
-  depends_on        = [tls_private_key.instance-key]
-  ami               = data.aws_ami.windows.id
-  instance_type     = var.windows-instance-type
-  availability_zone = var.virginia-a
-  key_name          = aws_key_pair.rose-court-instance-key.key_name
-  get_password_data = var.get-pass-data
-  security_groups   = [aws_security_group.allow-RDP.name]
-  tags = {
-    Name = var.instance-name
-  }
-  lifecycle {
-    prevent_destroy = true # we really do not want our DC to be destroyed ...
-  }
-}
+# resource "aws_instance" "underworld-dc" { #using the above data for the AMI
+#   depends_on        = [tls_private_key.instance-key]
+#   ami               = data.aws_ami.windows.id
+#   instance_type     = var.windows-instance-type
+#   availability_zone = var.virginia-a
+#   key_name          = aws_key_pair.rose-court-instance-key.key_name
+#   get_password_data = var.get-pass-data
+#   security_groups   = [aws_security_group.allow-RDP.name]
+#   tags = {
+#     Name = var.instance-name
+#   }
+#   lifecycle {
+#     prevent_destroy = false # we really do not want our DC to be destroyed ...
+#   }
+# }
 
 resource "aws_instance" "underworld-member" { #creating a member ec2 for our AD domain
   depends_on        = [tls_private_key.instance-key]
@@ -100,17 +100,17 @@ resource "aws_instance" "underworld-member" { #creating a member ec2 for our AD 
 
 }
 
-resource "aws_ssm_parameter" "windows-ec2" { # storing the windows password so we don't leave it in plaintext in code
-  name       = var.parameter-name
-  type       = var.parameter-type
-  depends_on = [aws_instance.underworld-dc]
-  value      = rsadecrypt(aws_instance.underworld-dc.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
-}
+# resource "aws_ssm_parameter" "windows-ec2-dc" { # storing the windows password so we don't leave it in plaintext in code
+#   name       = var.parameter-name
+#   type       = var.parameter-type
+#   depends_on = [aws_instance.underworld-dc]
+#   value      = rsadecrypt(aws_instance.underworld-dc.password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
+# }
 
 resource "aws_ssm_parameter" "windows-ec2-member" { # storing the windows password so we don't leave it in plaintext in code
   name       = var.member-parameter-name
   type       = var.parameter-type
-  depends_on = [aws_instance.underworld-dc]
+  depends_on = [aws_instance.underworld-member]
   value      = rsadecrypt(aws_instance.underworld-member[0].password_data, nonsensitive(tls_private_key.instance-key.private_key_pem))
 }
 
@@ -120,11 +120,11 @@ resource "aws_ssm_parameter" "nico-pass" { # storing the windows password so we 
   value = var.nico-password
 }
 
-resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password so we don't leave it in plaintext in code
-  name  = var.AdminSafeModePass-Param-name
-  type  = var.parameter-type
-  value = var.AdminSafeModePassword
-}
+# resource "aws_ssm_parameter" "admin-safepass" { # storing the windows password so we don't leave it in plaintext in code
+#   name  = var.AdminSafeModePass-Param-name
+#   type  = var.parameter-type
+#   value = var.AdminSafeModePassword
+# }
 
 # resource "aws_ami_from_instance" "DC-ami" { # this was removed from the state file for use in manual testing. Can be recreated as more progress is made
 #   name               = "DC-ami"
